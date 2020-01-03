@@ -1,0 +1,27 @@
+{
+  "name": "dashboard",
+  "version": "0.1.0",
+  "scripts": {
+    "start:dev": "docker-compose up -d",
+    "start:staging": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up -d",
+    "start:prod": "docker-compose -f docker-compose.yml up -d",
+    "migrate:latest": "docker exec dashboard-api npx knex migrate:latest ts",
+    "migrate:rollback": "docker exec dashboard-api npx knex migrate:rollback",
+    "seed": "docker exec dashboard-api npx knex seed:run",
+    "build:api:dev": "docker-compose build api",
+    "build:api:staging": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml build api",
+    "build:api:prod": "docker-compose -f docker-compose.yml build api"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lakhai/gql-dashboard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lakhai/gql-dashboard/issues"
+  },
+  "homepage": "https://github.com/lakhai/gql-dashboard#readme",
+  "devDependencies": {
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  }
+}

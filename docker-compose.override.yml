@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  # proxy:
+  #   build: ./nginx
+  #   container_name: dashboard-proxy
+  #   ports:
+  #     - 80:80
+  #   depends_on:
+  #     - api
+
+  api:
+    restart: "no"
+    volumes:
+      - ./api/src:/usr/src/app/src
+      - ./api/migrations:/usr/src/app/migrations
+      - ./api/seeds:/usr/src/app/seeds
+    ports:
+      - 9229:9229
+    entrypoint:
+      - npm
+      - run
+      - start:watch
+    environment:
+      - NODE_ENV=development
+      - POSTGRES_HOST=db
+      - POSTGRES_USER=dashboard
+      - POSTGRES_PASSWORD=dashboard
+      - POSTGRES_DB=dashboard_dev
+      - JWT_SECRET=secret
+      - S3_AVATAR_BUCKET=devdashboard
+    env_file: secret-dev.env
+
+  admin:
+    restart: "no"
+    # environment:
+    #   - PUBLIC_URL=/admin
+    volumes:
+      - ./admin/src:/usr/src/app/src
+    # ports:
+    #   - 4200:4200
+    entrypoint:
+      - npm
+      - start
+
+  db:
+    restart: "no"
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=dashboard_dev
+
+  adminer:
+    image: adminer
+    container_name: dashboard-dev-adminer
+    ports:
+      - 8080:8080

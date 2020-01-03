@@ -1,0 +1,12 @@
+<header class="app-header">
+  <span>Dashboard</span>
+  <div class="spacer"></div>
+  <div *ngIf="isAuthenticated; else loggedOut">
+    {{ user.firstName }}&nbsp;
+    <button mat-flat-button (click)="logout()">Log out</button>
+  </div>
+
+  <ng-template #loggedOut>
+    <a href="/auth" mat-stroked-button>Log in</a>
+  </ng-template>
+</header>

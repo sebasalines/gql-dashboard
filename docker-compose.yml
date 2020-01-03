@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  api:
+    build: ./api
+    restart: always
+    container_name: dashboard-api
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    logging:
+      options:
+        max-size: "5m"
+    environment:
+      - NODE_ENV=production
+      - S3_AVATAR_BUCKET=dashboard
+    env_file: secret.env
+
+  admin:
+    build: ./admin
+    restart: always
+    container_name: dashboard-admin
+    ports:
+      - "4200:4200"
+
+  db:
+    build: ./db
+    restart: always
+    container_name: dashboard-db
+    volumes:
+      - /var/lib/postgresql/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=dashboard
+      - POSTGRES_DB=dashboard
+    env_file: secret.env

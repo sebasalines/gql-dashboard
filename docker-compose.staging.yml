@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  api:
+    environment:
+      - NODE_ENV=staging
+      - S3_AVATAR_BUCKET=staging-dashboard
+    env_file: secret-staging.env
+
+  db:
+    volumes:
+      - /var/lib/stagingpostgresql/data:/var/lib/postgresql/data
+    environment:
+      - NODE_ENV=staging
+      - POSTGRES_DB=dashboard_staging
+    env_file: secret-staging.env
