@@ -1,0 +1,8 @@
+html, body {
+  min-height: 100vh;
+  display: flex;
+}
+body, #root {
+  flex: 1;
+  display: flex;
+}

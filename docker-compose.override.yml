@@ -31,16 +31,16 @@ services:
       - S3_AVATAR_BUCKET=devdashboard
     env_file: secret-dev.env
 
-  admin:
+  client:
     restart: "no"
     # environment:
-    #   - PUBLIC_URL=/admin
+    #   - PUBLIC_URL=/client
     volumes:
-      - ./admin/src:/usr/src/app/src
+      - ./client/src:/usr/src/app/src
     # ports:
-    #   - 4200:4200
+    #   - 3000:3000
     entrypoint:
-      - npm
+      - yarn
       - start
 
   db:

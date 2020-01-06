@@ -11,7 +11,7 @@ const server = new ApolloServer({
   // },
   // debug: true,
   cors: {
-    origin: 'http://localhost:4200',			// <- allow request from all domains
+    origin: '*',			// <- allow request from all domains
     credentials: true,
   },
   context: async ({ req, res, connection }) => {

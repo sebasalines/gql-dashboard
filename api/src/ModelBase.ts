@@ -4,7 +4,7 @@ import toMysqlFormat from './lib/toMysqlFormat';
 
 const config = require('../knexfile');
 console.log({config});
-const knex = Knex(config.default[process.env.NODE_ENV]);
+const knex = Knex(config[process.env.NODE_ENV]);
 
 Model.knex(knex);
 

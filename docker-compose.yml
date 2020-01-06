@@ -17,12 +17,12 @@ services:
       - S3_AVATAR_BUCKET=dashboard
     env_file: secret.env
 
-  admin:
-    build: ./admin
+  client:
+    build: ./client
     restart: always
-    container_name: dashboard-admin
+    container_name: dashboard-client
     ports:
-      - "4200:4200"
+      - "3000:3000"
 
   db:
     build: ./db
